@@ -28,3 +28,21 @@ test('cli --name Ada prints hello, Ada', () => {
   assert.equal(result.status, 0);
   assert.equal(result.stdout, 'hello, Ada\n');
 });
+
+test('cli --loud prints HELLO', () => {
+  const cli = fileURLToPath(new URL('./cli.js', import.meta.url));
+  const result = spawnSync(process.execPath, [cli, '--loud'], {
+    encoding: 'utf8',
+  });
+  assert.equal(result.status, 0);
+  assert.equal(result.stdout, 'HELLO\n');
+});
+
+test('cli --name Ada --loud prints HELLO, ADA', () => {
+  const cli = fileURLToPath(new URL('./cli.js', import.meta.url));
+  const result = spawnSync(process.execPath, [cli, '--name', 'Ada', '--loud'], {
+    encoding: 'utf8',
+  });
+  assert.equal(result.status, 0);
+  assert.equal(result.stdout, 'HELLO, ADA\n');
+});
