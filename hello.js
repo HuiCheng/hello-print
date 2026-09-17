@@ -1,4 +1,4 @@
-export { parseOptions } from './parse.js';
+export { parseOptions, usage } from './parse.js';
 
 export function hello(name) {
   if (name === undefined) {

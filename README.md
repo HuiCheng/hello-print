@@ -34,6 +34,14 @@ node cli.js --name Ada --loud
 
 You will see a single line `HELLO, ADA`.
 
+To print usage and exit 0, pass `--help`.
+
+```
+node cli.js --help
+```
+
+You will see a single line `Usage: node cli.js [--name <name>] [--loud] [--help]`.
+
 ## How to run the tests
 
 ```

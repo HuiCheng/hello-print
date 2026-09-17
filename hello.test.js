@@ -46,3 +46,12 @@ test('cli --name Ada --loud prints HELLO, ADA', () => {
   assert.equal(result.status, 0);
   assert.equal(result.stdout, 'HELLO, ADA\n');
 });
+
+test('cli --help prints usage and exits 0', () => {
+  const cli = fileURLToPath(new URL('./cli.js', import.meta.url));
+  const result = spawnSync(process.execPath, [cli, '--help'], {
+    encoding: 'utf8',
+  });
+  assert.equal(result.status, 0);
+  assert.equal(result.stdout, 'Usage: node cli.js [--name <name>] [--loud] [--help]\n');
+});
