@@ -15,3 +15,16 @@ test('cli prints hello', () => {
   assert.equal(result.status, 0);
   assert.equal(result.stdout, 'hello\n');
 });
+
+test('hello with Ada returns hello, Ada', () => {
+  assert.equal(hello('Ada'), 'hello, Ada');
+});
+
+test('cli --name Ada prints hello, Ada', () => {
+  const cli = fileURLToPath(new URL('./cli.js', import.meta.url));
+  const result = spawnSync(process.execPath, [cli, '--name', 'Ada'], {
+    encoding: 'utf8',
+  });
+  assert.equal(result.status, 0);
+  assert.equal(result.stdout, 'hello, Ada\n');
+});

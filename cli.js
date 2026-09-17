@@ -1,3 +1,3 @@
-import { hello } from './hello.js';
+import { hello, parseName } from './hello.js';
 
-console.log(hello());
+console.log(hello(parseName(process.argv.slice(2))));

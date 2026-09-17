@@ -12,6 +12,14 @@ npm start
 
 You will see a single line `hello`.
 
+To greet someone, pass `--name` and a value.
+
+```
+node cli.js --name Ada
+```
+
+You will see a single line `hello, Ada`.
+
 ## How to run the tests
 
 ```
