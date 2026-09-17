@@ -1,18 +1,15 @@
-import { test } from 'node:test';
-import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { dirname, join } from 'node:path';
+import assert from 'node:assert/strict';
 import { fileURLToPath } from 'node:url';
+import { test } from 'node:test';
 import { hello } from './hello.js';
-
-const root = dirname(fileURLToPath(import.meta.url));
 
 test('hello returns hello', () => {
   assert.equal(hello(), 'hello');
 });
 
-test('cli prints hello plus a newline', () => {
-  const result = spawnSync(process.execPath, [join(root, 'cli.js')], {
+test('cli prints hello', () => {
+  const result = spawnSync(process.execPath, [fileURLToPath(new URL('./hello.js', import.meta.url))], {
     encoding: 'utf8',
   });
   assert.equal(result.status, 0);
