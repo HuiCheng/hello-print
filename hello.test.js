@@ -9,7 +9,7 @@ test('hello returns hello', () => {
 });
 
 test('cli prints hello', () => {
-  const result = spawnSync(process.execPath, [fileURLToPath(new URL('./hello.js', import.meta.url))], {
+  const result = spawnSync(process.execPath, [fileURLToPath(new URL('./cli.js', import.meta.url))], {
     encoding: 'utf8',
   });
   assert.equal(result.status, 0);

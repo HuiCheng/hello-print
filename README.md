@@ -18,4 +18,4 @@ You will see a single line `hello`.
 npm test
 ```
 
-A passing run prints the `hello.js` stdout line `hello` from the spawn test and ends with tests passing.
+A passing run prints the `cli.js` stdout line `hello` from the spawn test and ends with tests passing.
