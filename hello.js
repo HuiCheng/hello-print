@@ -1,14 +1,15 @@
 import { parseArgs } from 'node:util';
 
-export function parseName(args) {
+export function parseOptions(args) {
   const { values } = parseArgs({
     args,
     options: {
       name: { type: 'string' },
+      loud: { type: 'boolean', default: false },
     },
     strict: true,
   });
-  return values.name;
+  return { name: values.name, loud: values.loud };
 }
 
 export function hello(name) {
@@ -16,4 +17,11 @@ export function hello(name) {
     return 'hello';
   }
   return `hello, ${name}`;
+}
+
+export function render(text, loud) {
+  if (loud) {
+    return text.toUpperCase();
+  }
+  return text;
 }

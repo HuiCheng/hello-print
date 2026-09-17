@@ -20,6 +20,20 @@ node cli.js --name Ada
 
 You will see a single line `hello, Ada`.
 
+To print the greeting in uppercase, pass `--loud`.
+
+```
+node cli.js --loud
+```
+
+You will see a single line `HELLO`.
+
+```
+node cli.js --name Ada --loud
+```
+
+You will see a single line `HELLO, ADA`.
+
 ## How to run the tests
 
 ```
