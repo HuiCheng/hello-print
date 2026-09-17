@@ -1,3 +1,4 @@
-import { hello, parseName } from './hello.js';
+import { hello, parseOptions, render } from './hello.js';
 
-console.log(hello(parseName(process.argv.slice(2))));
+const { name, loud } = parseOptions(process.argv.slice(2));
+console.log(render(hello(name), loud));
