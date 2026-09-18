@@ -53,5 +53,5 @@ test('cli --help prints usage and exits 0', () => {
     encoding: 'utf8',
   });
   assert.equal(result.status, 0);
-  assert.equal(result.stdout, 'Usage: node cli.js [--name <name>] [--loud] [--help]\n');
+  assert.equal(result.stdout, 'Usage: node cli.js [--help] [--name <name>] [--loud]\n');
 });
