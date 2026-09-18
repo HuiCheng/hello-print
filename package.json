@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "start": "node cli.js",
-    "test": "node --test"
+    "test": "node --test",
+    "hygiene": "bash scripts/stack-hygiene.sh"
   }
 }
