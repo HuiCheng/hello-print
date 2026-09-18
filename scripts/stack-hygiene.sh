@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+dry_run=0
+if [ "${1:-}" = "--dry-run" ]; then
+  dry_run=1
+  shift
+fi
+
 if [ $# -ne 1 ]; then
-  echo "Usage: scripts/stack-hygiene.sh <#N|N|branch>" >&2
+  echo "Usage: scripts/stack-hygiene.sh [--dry-run] <#N|N|branch>" >&2
   exit 2
 fi
 
@@ -61,11 +67,17 @@ while read -r wt; do
     echo "error: worktree $wt is dirty" >&2
     exit 1
   fi
-  git worktree remove "$wt"
-  echo "removed worktree $wt"
+  if [ "$dry_run" -eq 1 ]; then
+    echo "dry-run: would remove worktree $wt"
+  else
+    git worktree remove "$wt"
+    echo "removed worktree $wt"
+  fi
 done < <(git worktree list --porcelain | awk '/^worktree /{print $2}')
 
-git worktree prune
+if [ "$dry_run" -eq 0 ]; then
+  git worktree prune
+fi
 
 if git show-ref --verify --quiet "refs/heads/$branch"; then
   current=$(git symbolic-ref --quiet --short HEAD || true)
@@ -73,20 +85,30 @@ if git show-ref --verify --quiet "refs/heads/$branch"; then
     echo "error: $primary has $branch checked out" >&2
     exit 1
   fi
-  git branch -D "$branch"
-  echo "deleted local $branch"
+  if [ "$dry_run" -eq 1 ]; then
+    echo "dry-run: would delete local $branch"
+  else
+    git branch -D "$branch"
+    echo "deleted local $branch"
+  fi
 else
   echo "local $branch already gone"
 fi
 
 if git show-ref --verify --quiet "refs/remotes/origin/$branch"; then
-  git push origin --delete "$branch"
-  echo "deleted origin/$branch"
+  if [ "$dry_run" -eq 1 ]; then
+    echo "dry-run: would delete origin/$branch"
+  else
+    git push origin --delete "$branch"
+    echo "deleted origin/$branch"
+  fi
 else
   echo "origin/$branch already gone"
 fi
 
-git fetch --prune origin
+if [ "$dry_run" -eq 0 ]; then
+  git fetch --prune origin
+fi
 
 echo "--- branches ---"
 git branch -vv
