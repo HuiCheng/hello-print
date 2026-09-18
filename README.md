@@ -52,7 +52,9 @@ A passing run prints the `cli.js` stdout line `hello` from the spawn test and en
 
 ## How to clean a merged stack branch
 
-The greeting CLI does not change. After a PR is `MERGED`, run the hygiene script with the PR number or the branch name.
+After GitHub marks the PR `MERGED`, clean its branch with the hygiene script. The greeting CLI does not change.
+
+1. From any worktree of this repo, run the script with the PR number or the branch name.
 
 ```
 npm run hygiene -- 5
@@ -62,4 +64,8 @@ npm run hygiene -- 5
 npm run hygiene -- feat/hello-help
 ```
 
-The script confirms `MERGED` with `gh`, removes matching worktrees listed by `git worktree list`, deletes the local and remote branch, runs `git fetch --prune`, and prints remaining branches plus `git status`. A second run on the same merged PR exits 0. It refuses `main`, an open PR, and a dirty worktree.
+2. Confirm that the script prints `PR #N is MERGED` and then removes matching worktrees, the local branch, and `origin/<branch>`.
+3. Confirm that the script prints remaining branches and `git status`.
+4. Run the same command again. A second run exits 0 and reports that the local and remote branches are already gone.
+
+The script refuses `main`, an open PR, and a dirty worktree.
