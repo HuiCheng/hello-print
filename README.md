@@ -40,7 +40,7 @@ To print usage and exit 0, pass `--help`.
 node cli.js --help
 ```
 
-You will see a single line `Usage: node cli.js [--name <name>] [--loud] [--help]`.
+You will see a single line `Usage: node cli.js [--help] [--name <name>] [--loud]`.
 
 ## How to run the tests
 
