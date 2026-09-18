@@ -14,5 +14,5 @@ export function parseOptions(args) {
 }
 
 export function usage() {
-  return 'Usage: node cli.js [--name <name>] [--loud] [--help]';
+  return 'Usage: node cli.js [--help] [--name <name>] [--loud]';
 }
